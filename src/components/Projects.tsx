@@ -3,7 +3,7 @@ import ProjectsCard from "./ProjectsCard";
 
 import projectOne from '../assets/images/projects/projectOne.jpg';
 import projectFour from '../assets/images/projects/projectFour.jpg';
-import projectFive from '../assets/images/projects/projectFive.png';
+import projectFive from '../assets/images/projects/projectFive.jpg';
 
 import projectTwo from '../assets/images/projects/projectTwo.jpg';
 import projectThree from '../assets/images/projects/projectThree.jpeg';
