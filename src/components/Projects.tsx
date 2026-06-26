@@ -1,11 +1,11 @@
 import Title from "./Title.tsx";
 import ProjectsCard from "./ProjectsCard";
 
-import projectOne from '../assets/images/projects/projectOne.jpg';
-import projectFour from '../assets/images/projects/projectFour.jpg';
-import projectFive from '../assets/images/projects/projectFive.jpg';
+import projectOne from '../assets/images/projects/projectOne.png';
+import projectFour from '../assets/images/projects/projectFour.png';
+import projectFive from '../assets/images/projects/projectFive.png';
 
-import projectTwo from '../assets/images/projects/projectTwo.jpg';
+import projectTwo from '../assets/images/projects/projectTwo.png';
 import projectThree from '../assets/images/projects/projectThree.jpeg';
 
 
@@ -51,8 +51,8 @@ const Projects = () => {
             src={projectFive}
           />
           <ProjectsCard
-           title="MovieLand — Movie Search App"
-           des="Movie search application built with React.js integrating third-party REST APIs for dynamic content fetching and responsive UI."
+            title="MovieLand — Movie Search App"
+            des="Movie search application built with React.js integrating third-party REST APIs for dynamic content fetching and responsive UI."
             src={projectTwo}
 
           />

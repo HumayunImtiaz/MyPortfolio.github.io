@@ -7,6 +7,8 @@ import Projects from "./components/Projects";
 import Resume from "./components/Resume";
 // import Testimonial from "./components/Testimonial";
 
+import ChatBot from "./components/ChatBot";
+
 function App() {
   return (
     <main className="font-bodyFont w-full h-auto bg-bodyColor text-lightText">
@@ -22,6 +24,7 @@ function App() {
           <Footer />
         </div>
       </div>
+      <ChatBot />
     </main>
   );
 }
