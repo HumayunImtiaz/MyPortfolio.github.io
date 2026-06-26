@@ -18,7 +18,7 @@ const Resume = () => {
     >
       <FadeIn>
         <div className="flex justify-center items-center text-center">
-          <Title title="Jnr Software Engineer" des="My Resume" />
+          <Title title="Full-Stack Software Engineer" des="My Resume" />
         </div>
         <div>
           <ul className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">

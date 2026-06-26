@@ -1,5 +1,5 @@
 
-import {FaReact, FaGraduationCap, FaCode, FaCodepen, FaTeamspeak, FaVideo} from "react-icons/fa";
+import { FaReact, FaDocker, FaCode, FaCodepen, FaNodeJs, FaRobot } from "react-icons/fa";
 import Card from "./Card";
 import Title from "./Title.tsx";
 import { FadeIn } from "./FadeIn";
@@ -15,39 +15,34 @@ const Feature = () => {
         <Title title="Features" des="What I Do" />
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-20">
           <Card
-            title="Software Engineering Expertise"
-            des="I'm a Software Engineer skilled in solving complex problems using technologies like JavaScript, React.js, and MySQL. My focus is on creating innovative solutions that improve user experiences."
-            icon={<FaGraduationCap/>}
-          />
-          <Card
-            title="Frontend Developer"
-            des="With hands-on experience in frontend development,I build dynamic, responsive user interfaces. I specialize in HTML, CSS,
-                 Tailwind CSS, and React to create seamless interactions."
+            title="Full-Stack Development"
+            des="Building scalable web applications end-to-end using Next.js, React.js, Node.js, Express.js with TypeScript across the MERN and PERN stacks."
             icon={<FaReact />}
           />
           <Card
-            title=" Key Programming Languages"
-            des="Proficient in  C++, Java, React-Native, I design scalable software solutions using OOP principles.
-                 I’m also familiar with MySQL and MongoDB for backend integration"
+            title="AI Integration & LLM Apps"
+            des="Integrating Google Gemini API to build intelligent tools like AI-powered Resume Analyzers and GitHub Profile evaluators with real-time AI feedback."
+            icon={<FaRobot />}
+          />
+          <Card
+            title="Database Architecture"
+            des="Designing efficient database schemas with PostgreSQL, MongoDB, Prisma ORM, Knex, Supabase, and Neon for optimized, scalable data management."
             icon={<FaCode />}
           />
           <Card
-            title="SDLC and Agile"
-            des="I have strong knowledge of SDLC, ensuring successful project delivery by collaborating with cross-functional teams.
-                 I focus on continuous improvement throughout the development cycle."
+            title="Real-Time Applications"
+            des="Architecting real-time features using Socket.io with bi-directional messaging, concurrent session handling, and event-driven Webhook workflows."
             icon={<FaCodepen />}
           />
           <Card
-            title="Communication Skills"
-            des="My communication skills help me effectively collaborate with teams and clients, translating needs into actionable solutions.
-                 I provide clear project updates and feedback for successful teamwork."
-            icon={<FaTeamspeak/>}
+            title="REST API & Backend Design"
+            des="Building robust REST APIs with Node.js/Express following MVC architecture, JWT authentication, role-based access control, and Multer/Cloudinary integration."
+            icon={<FaNodeJs />}
           />
           <Card
-            title="Video Editing and Content Creation"
-            des=" I have a passion for video editing, creating Ai content optimized for platforms. This skill helps me stay innovative and 
-                  apply unique visual strategies to my work."
-            icon={<FaVideo />}
+            title="DevOps & Deployment"
+            des="Containerizing apps with Docker, deploying on Vercel, Render, Railway, and Hugging Face Spaces. Experienced in Git workflows and Agile/Scrum delivery."
+            icon={<FaDocker />}
           />
         </div>
       </FadeIn>

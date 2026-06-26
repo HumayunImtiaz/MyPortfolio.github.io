@@ -10,52 +10,47 @@ const Experience = () => {
     >
       <div>
         <div className="py-6 lgl:py-12 font-titleFont flex flex-col gap-4">
-          <p className="text-sm text-designColor tracking-[4px]">2010 - 2022</p>
+          <p className="text-sm text-designColor tracking-[4px]">2022 - Present</p>
           <h2 className="text-3xl md:text-4xl font-bold">Job Experience</h2>
         </div>
         <div className="mt-6 lgl:mt-14 w-full h-[1000px] border-l-[6px] border-l-black border-opacity-30 flex flex-col gap-10">
           <ResumeCard
-            title="Frontend"
-            subTitle="Virtue Netz- (2024)"
-            result="Rahim Yar Khan"
-            des="Frontend development and a strong foundation in programming, My proactive learning approach and passion for software engineering."
+            title="Software Engineer - Full-Stack"
+            subTitle="Virtue Netz (Jan 2025 - Present)"
+            result="On-site"
+            des="Developed production-grade apps using Next.js & PostgreSQL. Built eCommerce & pet services apps, architected real-time chat, and integrated Gemini AI."
           />
           <ResumeCard
-            title="Bussines Development"
-            subTitle="Disgital Product Design"
-            result="India"
-            des="I'm Pro Video Editor also and helping to promote the company using upwork or digital platform."
-          />
-          <ResumeCard
-            title="Professional Video Editor and Adda maker"
-            subTitle="Digital Media"
-            result="Lundon"
-            des="As a video editor and Ai content creator serv almost 1.2 years"
+            title="Teaching Assistant - C++ & Web Dev"
+            subTitle="KFUEIT (Sep 2022 - Jun 2024)"
+            result="On-site"
+            des="Guided 50+ students in OOP, Data Structures & Algorithms. Debugged React.js and Node.js student projects with constructive feedback."
           />
         </div>
       </div>
       <div>
         <div className="py-6 lgl:py-12 font-titleFont flex flex-col gap-4">
-          <p className="text-sm text-designColor tracking-[4px]">2001 - 2020</p>
-          <h2 className="text-3xl md:text-4xl font-bold">Trainer Experience</h2>
+          <p className="text-sm text-designColor tracking-[4px]">Recent</p>
+          <h2 className="text-3xl md:text-4xl font-bold">Key Projects</h2>
         </div>
         <div className="mt-6 lgl:mt-14 w-full h-[1000px] border-l-[6px] border-l-black border-opacity-30 flex flex-col gap-10">
           <ResumeCard
-            title="Infosync"
-            subTitle="Frontend Developer"
-            result="Remotely"
-            des="This is first step i join to the company as a frontend developer and gain very strong experience"
+            title="E-Commerce Marketplace Platform"
+            subTitle="Next.js, Node.js, PostgreSQL, Prisma"
+            result="Full-Stack"
+            des="Built a scalable marketplace with JWT auth, multi-vendor support, secure uploads, and real-time features using Socket.io."
           />
           <ResumeCard
-            title="Software Engineer (SDLC)"
-            subTitle="Z-ZONE"
-            result="Remotely"
-            des="Join the training for gain very well experience how the project life cycle work."
+            title="AI Resume & GitHub Analyzer"
+            subTitle="Next.js, TypeScript, Gemini API"
+            result="AI/LLM"
+            des="Smart tool integrated with Next.js frontend and Google Gemini API for automated resume parsing and intelligent profile insights."
           />
           <ResumeCard
-            title="Assistant Professor "
-            result="KFUEIT"
-            des="This is very well experience how to manage shadule of work."
+            title="Real-Time Chat Application"
+            subTitle="Next.js, Express, Supabase"
+            result="WebSockets"
+            des="Bi-directional messaging platform with concurrent session handling, built on MVC architecture and optimized PostgreSQL."
           />
         </div>
       </div>

@@ -26,36 +26,33 @@ const Projects = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-14">
           <ProjectsCard
-            title="Currency Changer"
-            des=" This tool is used to convert the currency. In javascript using fetch API"
+            title="E-Commerce Marketplace Platform"
+            des="Full-stack marketplace with Next.js, TypeScript, Node.js/Express (MVC), JWT auth, role-based access, Socket.io real-time features, Neon PostgreSQL + Prisma."
             src={projectFour}
           />
           <ProjectsCard
-            title="TCI-Space honed in React.js"
-            des=" This project was a deep dive into creating a responsive and intuitive user interface, 
-                 combining design precision with a seamless user experience!"
+            title="AI Resume & GitHub Analyzer"
+            des="Intelligent analysis tool using Google Gemini API for automated resume parsing and GitHub profile evaluation with real-time AI-generated feedback."
             src={projectTwo}
           />
           <ProjectsCard
-            title="Amazon Clone in Tailwind CSS"
-            des="Make Amazon Clone Using Taiwind CSS acces many properties of Tailwind CSS!"
+            title="Real-Time Chat Application"
+            des="Next.js + TypeScript frontend with Socket.io bi-directional messaging. Node.js/Express MVC backend with PostgreSQL (Supabase) and Knex query builder."
             src={projectThree}
           />
           <ProjectsCard
-            title="Mediplus Clone"
-            des="As the frontend developer for Mediplus, I focused on creating a user-friendly, 
-                 intuitive interface that enhances the healthcare experience for users. "
+            title="Restaurant Dining Experience"
+            des="Frontend project showcasing responsive UI design using React.js, Tailwind CSS, and third-party REST API integration."
             src={projectOne}
           />
           <ProjectsCard
-            title="CUSTUM VICHLES WRAP & SIGN"
-            des="Custom vichles wrap make the fully responsive clone according to requirement"
+            title="Outfit Cart — E-Commerce"
+            des="Frontend e-commerce application with modern UI, cart management, and responsive design built with React.js and Tailwind CSS."
             src={projectFive}
           />
           <ProjectsCard
-           title="TCI-Space honed in React.js"
-           des=" This project was a deep dive into creating a responsive and intuitive user interface, 
-                combining design precision with a seamless user experience!"
+           title="MovieLand — Movie Search App"
+           des="Movie search application built with React.js integrating third-party REST APIs for dynamic content fetching and responsive UI."
             src={projectTwo}
 
           />

@@ -1,13 +1,13 @@
 import { useTypewriter, Cursor } from "react-simple-typewriter";
-import { FaFacebookF,  FaLinkedinIn, FaReact, FaWhatsapp , } from "react-icons/fa";
-import { SiTailwindcss, } from "react-icons/si";
+import { FaFacebookF, FaLinkedinIn, FaReact, FaWhatsapp, FaNodeJs } from "react-icons/fa";
+import { SiTypescript, SiPostgresql } from "react-icons/si";
 import { FadeIn } from "./FadeIn";
-import { BsDatabase, BsGithub } from "react-icons/bs";
+
 
 
 const LeftBanner = () => {
   const [text] = useTypewriter({
-    words: ["Software Engineer.", "MERN STACK developer.", "Software Developer Life Cycle."],
+    words: ["Full-Stack Software Engineer.", "MERN / PERN Stack Developer.", "AI Integration Specialist."],
     loop: true,
     typeSpeed: 25,
     deleteSpeed: 10,
@@ -25,9 +25,7 @@ const LeftBanner = () => {
           <Cursor cursorStyle="|" cursorColor="#ff014f" />
         </h2>
         <p className="text-base font-bodyFont leading-6 tracking-wider">
-        Proficient in JavaScript, React, HTML, CSS, and Tailwind CSS, React.js, API ,OOP, MySQL and familiar with Mongodb, React-Native ,for developing engaging, responsive interfaces.
-        Experienced with SDLC principles and a range of programming languages like C++ and Java.
-        Strong communication skills, enabling effective collaboration with cross-functional teams and clients.
+        Full-Stack Software Engineer with 2+ years of professional experience building scalable, user-facing web applications using MERN and PERN stacks. Proficient in Next.js, TypeScript, PostgreSQL, Prisma, Docker, Socket.io, and AI API integration (Google Gemini). B.Sc. Software Engineering graduate with 3.51 GPA (Grade A).
 
         </p>
       </div>
@@ -66,13 +64,13 @@ const LeftBanner = () => {
               <FaReact />
             </span>
             <span className="bannerIcon">
-              <BsDatabase/>
+              <FaNodeJs />
             </span>
             <span className="bannerIcon">
-              <SiTailwindcss />
+              <SiTypescript />
             </span>
             <span className="bannerIcon">
-              < BsGithub/>
+              <SiPostgresql />
             </span>
           </div>
         </div>

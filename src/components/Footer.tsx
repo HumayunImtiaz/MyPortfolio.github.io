@@ -47,13 +47,13 @@ const Footer = () => {
           </li>
           <li>
             <span className="w-full text-lg relative hover:text-designColor duration-300 group cursor-pointer">
-              Services
+              Resume
               <span className="w-full h-[1px] bg-designColor inline-flex absolute left-0 -bottom-1 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-300"></span>
             </span>
           </li>
           <li>
             <span className="w-full text-lg relative hover:text-designColor duration-300 group cursor-pointer">
-              Blog
+              Projects
               <span className="w-full h-[1px] bg-designColor inline-flex absolute left-0 -bottom-1 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-300"></span>
             </span>
           </li>
@@ -67,36 +67,36 @@ const Footer = () => {
       </div>
       <div className="w-full h-full">
         <h3 className="text-xl uppercase text-designColor tracking-wider">
-          RESOURCES
+          TECH STACK
         </h3>
         <ul className="flex flex-col gap-4 font-titleFont font-medium py-6 overflow-hidden">
           <li>
             <span className="w-full text-lg relative hover:text-designColor duration-300 group cursor-pointer">
-              Authentication
+              Next.js & React.js
               <span className="w-full h-[1px] bg-designColor inline-flex absolute left-0 -bottom-1 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-300"></span>
             </span>
           </li>
           <li>
             <span className="w-full text-lg relative hover:text-designColor duration-300 group cursor-pointer">
-              System Status
+              Node.js & Express
               <span className="w-full h-[1px] bg-designColor inline-flex absolute left-0 -bottom-1 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-300"></span>
             </span>
           </li>
           <li>
             <span className="w-full text-lg relative hover:text-designColor duration-300 group cursor-pointer">
-              Terms of Service
+              PostgreSQL & Prisma
               <span className="w-full h-[1px] bg-designColor inline-flex absolute left-0 -bottom-1 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-300"></span>
             </span>
           </li>
           <li>
             <span className="w-full text-lg relative hover:text-designColor duration-300 group cursor-pointer">
-              Pricing
+              TypeScript
               <span className="w-full h-[1px] bg-designColor inline-flex absolute left-0 -bottom-1 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-300"></span>
             </span>
           </li>
           <li>
             <span className="w-full text-lg relative hover:text-designColor duration-300 group cursor-pointer">
-              Over Right
+              Docker & DevOps
               <span className="w-full h-[1px] bg-designColor inline-flex absolute left-0 -bottom-1 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-300"></span>
             </span>
           </li>
@@ -104,36 +104,36 @@ const Footer = () => {
       </div>
       <div className="w-full h-full">
         <h3 className="text-xl uppercase text-designColor tracking-wider">
-          DEVELOPERS
+          CONNECT
         </h3>
         <ul className="flex flex-col gap-4 font-titleFont font-medium overflow-hidden py-6">
           <li>
             <span className="w-full text-lg relative hover:text-designColor duration-300 group cursor-pointer">
-              Documentation
+              GitHub
               <span className="w-full h-[1px] bg-designColor inline-flex absolute left-0 -bottom-1 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-300"></span>
             </span>
           </li>
           <li>
             <span className="w-full text-lg relative hover:text-designColor duration-300 group cursor-pointer">
-              Authentication
+              LinkedIn
               <span className="w-full h-[1px] bg-designColor inline-flex absolute left-0 -bottom-1 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-300"></span>
             </span>
           </li>
           <li>
             <span className="w-full text-lg relative hover:text-designColor duration-300 group cursor-pointer">
-              API Reference
+              Email
               <span className="w-full h-[1px] bg-designColor inline-flex absolute left-0 -bottom-1 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-300"></span>
             </span>
           </li>
           <li>
             <span className="w-full text-lg relative hover:text-designColor duration-300 group cursor-pointer">
-              Support
+              WhatsApp
               <span className="w-full h-[1px] bg-designColor inline-flex absolute left-0 -bottom-1 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-300"></span>
             </span>
           </li>
           <li>
             <span className="w-full text-lg relative hover:text-designColor duration-300 group cursor-pointer">
-              Open Source
+              Portfolio
               <span className="w-full h-[1px] bg-designColor inline-flex absolute left-0 -bottom-1 -translate-x-[100%] group-hover:translate-x-0 transition-transform duration-300"></span>
             </span>
           </li>

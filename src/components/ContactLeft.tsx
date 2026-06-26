@@ -12,12 +12,10 @@ const ContactLeft = () => {
       <div className="flex flex-col gap-4">
         <h3 className="text-3xl font-bold text-white">Humayun Imtiaz</h3>
         <p className="text-lg font-normal text-gray-400">
-          Frontend Developer
+          Full-Stack Software Engineer
         </p>
         <p className="text-base text-gray-400 tracking-wide">
-        A self-motivated individual with expertise across multiple programming languages and frameworks, 
-        I thrive on solving complex challenges and building innovative solutions that enhance user experiences.
-
+        Full-Stack Engineer specializing in MERN/PERN stacks with expertise in Next.js, TypeScript, PostgreSQL, and AI integration. I build scalable, production-grade web applications.
         </p>
         <p className="text-base text-gray-400 flex items-center gap-2">
           Phone: <span className="text-lightText">+923054353847</span>

@@ -45,9 +45,7 @@ const Navbar = () => {
               <div>
                 <img className="w-32" src={logo} alt="logo" />
                 <p className="text-sm text-designColor mt-2">
-                Proficient in JavaScript, React, HTML, CSS, and Tailwind CSS, React.js, API ,OOP, MySQL and familiar with Mongodb, React-Native ,for developing engaging, responsive interfaces.
-                Experienced with SDLC principles and a range of programming languages like C++ and Java.
-                Strong communication skills, enabling effective collaboration with cross-functional teams and clients.
+                Full-Stack Software Engineer with 2+ years experience in MERN/PERN stacks. Proficient in Next.js, TypeScript, PostgreSQL, Prisma, Docker, Socket.io, and AI API integration.
                 </p>
               </div>
               <ul className="flex flex-col gap-4">
@@ -75,25 +73,25 @@ const Navbar = () => {
                   Find me in
                 </h2>
                 <div className="flex gap-4 ">
-                  <a href="https://www.youtube.com/@reactjsBD" target="_blank">
+                  <a href="https://wa.link/zv3t1u" target="_blank">
                     <span className="bannerIcon">
-                      <FaWhatsapp className="bg-designColor"/>
+                      <FaWhatsapp />
                     </span>
                   </a>
                   <a
-                    href="https://www.linkedin.com/in/noor-mohammad-ab2245193/"
+                    href="https://www.linkedin.com/in/humayun-imtiaz-a8501b266/"
                     target="_blank"
                   >
                     <span className="bannerIcon">
-                      <FaLinkedinIn className="bg-blue-700" />
+                      <FaLinkedinIn />
                     </span>
                   </a>
                   <a
-                    href="https://www.facebook.com/Noorlalu143/"
+                    href="https://www.facebook.com/humayun.humayunimtiaz"
                     target="_blank"
                   >
                     <span className="bannerIcon">
-                      <FaFacebookF className="bg-blue-400"/>
+                      <FaFacebookF />
                     </span>
                   </a>
                 </div>
