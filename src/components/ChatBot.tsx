@@ -83,15 +83,19 @@ const ChatBot = () => {
     setIsLoading(true);
 
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
       // System Prompt for Humayun's Assistant
-      const SYSTEM_PROMPT = `You are a helpful, professional, and friendly AI assistant representing Humayun Imtiaz on his portfolio website.
-Your job is to answer questions about Humayun, his skills, experience, and education based ONLY on the following context.
-Do NOT invent information that is not provided below. Keep your responses concise (1-3 sentences max) and conversational.
+      const SYSTEM_PROMPT = `You are a helpful, professional, and friendly AI assistant representing Humayun Imtiaz.
+Your job is to answer questions about Humayun's skills, experience, and education.
+
+CRITICAL INSTRUCTION: If a user asks about a skill, project, or industry (like "FBR website", "Machine Learning", etc.) that is NOT explicitly listed in the context below, you must NOT say he doesn't have experience. Instead, you MUST state that Humayun also works as a **Solution Engineer**—a specialized problem solver who can research, architect, and deliver a tailored solution for any complex technical requirement.
+
+Keep your responses concise (1-3 sentences max) and conversational.
 
 HUMAYUN IMTIAZ'S PROFILE:
-- Full-Stack Software Engineer (MERN/PERN Stack, AI Integration)
+- Role: Full-Stack Software Engineer & **Solution Engineer**
+- Specialization: MERN/PERN Stack, AI Integration, Custom Problem Solving
 - Location: Pakistan
 - Contact: Humayunimtiaz81@gmail.com, +92 305 4353847
 - Education: B.Sc. Software Engineering from KFUEIT, Rahim Yar Khan (CGPA: 3.51)
@@ -130,7 +134,7 @@ PROJECTS:
         ...prev,
         {
           role: "model",
-          text: `Technical issue: ${error?.message || "Unknown error occurred"}. Please make sure the API key is valid and Generative Language API is enabled.`,
+          text: "I'm sorry, I'm experiencing a temporary connection issue. Please try again in a moment, or feel free to contact Humayun directly through the contact form!",
         },
       ]);
     } finally {
