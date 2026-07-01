@@ -83,7 +83,7 @@ const ChatBot = () => {
     setIsLoading(true);
 
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
       // System Prompt for Humayun's Assistant
       const SYSTEM_PROMPT = `You are a helpful, professional, and friendly AI assistant representing Humayun Imtiaz.
@@ -192,11 +192,10 @@ PROJECTS:
                   }`}
               >
                 <div
-                  className={`max-w-[80%] rounded-xl px-4 py-3 text-sm leading-relaxed ${
-                    msg.role === "user"
+                  className={`max-w-[80%] rounded-xl px-4 py-3 text-sm leading-relaxed ${msg.role === "user"
                       ? "bg-designColor text-black font-medium rounded-br-none"
                       : "bg-gray-800 text-gray-200 rounded-bl-none border border-gray-700"
-                  }`}
+                    }`}
                 >
                   {msg.text}
                 </div>
