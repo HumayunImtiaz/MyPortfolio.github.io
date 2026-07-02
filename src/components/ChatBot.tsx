@@ -83,6 +83,20 @@ const ChatBot = () => {
     setIsLoading(true);
 
     try {
+      // Check if API key is available
+      if (!apiKey) {
+        console.error("Gemini API key is missing. VITE_GEMINI_API_KEY is not set.");
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "model",
+            text: "The AI assistant is currently being configured. Please contact Humayun directly through the contact form or email at Humayunimtiaz81@gmail.com!",
+          },
+        ]);
+        setIsLoading(false);
+        return;
+      }
+
       const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
       // System Prompt for Humayun's Assistant
@@ -129,7 +143,9 @@ PROJECTS:
       setMessages((prev) => [...prev, { role: "model", text: responseText }]);
       incrementUsage();
     } catch (error: any) {
-      console.error("Error connecting to Gemini:", error);
+      console.error("Gemini API Error:", error?.message || error);
+      console.error("API Key present:", !!apiKey);
+      console.error("Full error:", JSON.stringify(error, null, 2));
       setMessages((prev) => [
         ...prev,
         {
