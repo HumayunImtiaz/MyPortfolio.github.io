@@ -6,7 +6,7 @@ import projectFour from '../assets/images/projects/projectFour.png';
 import projectFive from '../assets/images/projects/projectFive.png';
 import projectTwoo from '../assets/images/projects/projectTwoo.png';
 import projectTwo from '../assets/images/projects/projectTwo.png';
-import projectThree from '../assets/images/projects/projectThree.jpeg';
+import projectThree from '../assets/images/projects/projectThree.png';
 
 
 import { FadeIn } from "./FadeIn";
