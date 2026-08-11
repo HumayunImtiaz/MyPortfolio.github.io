@@ -5,13 +5,15 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Projects from "./components/Projects";
 import Resume from "./components/Resume";
+import SmokeCursor from "./components/SmokeCursor";
 // import Testimonial from "./components/Testimonial";
 
 import ChatBot from "./components/ChatBot";
 
 function App() {
   return (
-    <main className="font-bodyFont w-full h-auto bg-bodyColor text-lightText">
+    <main className="font-bodyFont w-full h-auto bg-bodyColor text-lightText relative">
+      <SmokeCursor />
       <Navbar />
       <div className="px-4">
         <div className="max-w-screen-xl mx-auto">
