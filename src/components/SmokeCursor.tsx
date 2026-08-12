@@ -52,9 +52,8 @@ interface SmokeParticle {
   y: number;
   vx: number;
   vy: number;
-  size: number;
-  maxSize: number;
-  growth: number;
+  startSize: number;
+  endSize: number;
   life: number;
   maxLife: number;
   angle: number;
@@ -70,7 +69,7 @@ const SmokeCursor: React.FC = () => {
   const [isEnabled, setIsEnabled] = useState<boolean>(true);
   const [activePreset, setActivePreset] = useState<SmokePreset>(PRESETS[0]);
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
-  const [densityMultiplier, setDensityMultiplier] = useState<number>(1);
+  const [densityMultiplier, setDensityMultiplier] = useState<number>(1.2);
 
   // References for animation state
   const particlesRef = useRef<SmokeParticle[]>([]);
@@ -84,9 +83,9 @@ const SmokeCursor: React.FC = () => {
   const animFrameIdRef = useRef<number | null>(null);
   const textureCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  // Pre-render soft smoke cloud texture offscreen for max performance
+  // Pre-render soft volumetric smoke cloud texture offscreen
   const createSmokeTexture = (preset: SmokePreset) => {
-    const size = 128;
+    const size = 160;
     const canvas = document.createElement("canvas");
     canvas.width = size;
     canvas.height = size;
@@ -98,9 +97,10 @@ const SmokeCursor: React.FC = () => {
       const [r1, g1, b1] = preset.primaryRGB;
       const [r2, g2, b2] = preset.secondaryRGB;
 
-      grad.addColorStop(0, `rgba(${r1}, ${g1}, ${b1}, 0.8)`);
-      grad.addColorStop(0.3, `rgba(${r1}, ${g1}, ${b1}, 0.35)`);
-      grad.addColorStop(0.6, `rgba(${r2}, ${g2}, ${b2}, 0.12)`);
+      grad.addColorStop(0, `rgba(${r1}, ${g1}, ${b1}, 0.65)`);
+      grad.addColorStop(0.25, `rgba(${r1}, ${g1}, ${b1}, 0.35)`);
+      grad.addColorStop(0.55, `rgba(${r2}, ${g2}, ${b2}, 0.12)`);
+      grad.addColorStop(0.85, `rgba(${r2}, ${g2}, ${b2}, 0.03)`);
       grad.addColorStop(1, "rgba(0, 0, 0, 0)");
 
       ctx.fillStyle = grad;
@@ -156,40 +156,43 @@ const SmokeCursor: React.FC = () => {
       mouse.x = x;
       mouse.y = y;
 
-      // Check if target is interactive (button, a, input, etc)
+      // Check if target is interactive
       const target = e.target as HTMLElement | null;
       if (target) {
         const isInteractive = Boolean(
-          target.closest("a, button, input, textarea, select, .bannerIcon, .resumeLi, [role='button']")
+          target.closest("a, button, input, textarea, select, .bannerIcon, .resumeLi, [role='button'], img, .group")
         );
         isHoveringRef.current = isInteractive;
       }
 
-      // Calculate speed/velocity
+      // Calculate movement speed
       const dx = mouse.x - mouse.prevX;
       const dy = mouse.y - mouse.prevY;
       const dist = Math.sqrt(dx * dx + dy * dy);
 
-      // Spawn particles based on movement
-      const count = Math.min(8, Math.max(1, Math.floor(dist / 4))) * densityMultiplier;
+      // Balanced particle count for light, soft slow-motion smoke
+      const count = Math.min(9, Math.max(1, Math.floor(dist / 3.2))) * densityMultiplier;
       const hovering = isHoveringRef.current;
 
       for (let i = 0; i < count; i++) {
-        const jitterX = (Math.random() - 0.5) * (hovering ? 18 : 10);
-        const jitterY = (Math.random() - 0.5) * (hovering ? 18 : 10);
+        const jitterX = (Math.random() - 0.5) * (hovering ? 20 : 12);
+        const jitterY = (Math.random() - 0.5) * (hovering ? 20 : 12);
         const angle = Math.random() * Math.PI * 2;
 
-        // Base velocity opposite to movement + upward buoyance
-        const vx = -dx * 0.08 + (Math.random() - 0.5) * 0.8;
-        const vy = -dy * 0.08 - (0.4 + Math.random() * 0.6);
+        // Slow-motion physics: low velocity drift & smooth rise
+        const vx = -dx * 0.022 + (Math.random() - 0.5) * 0.35;
+        const vy = -dy * 0.022 - (0.12 + Math.random() * 0.2); // Gentle slow-motion rise
 
-        const initialSize = hovering ? 20 + Math.random() * 15 : 12 + Math.random() * 10;
-        const maxSize = hovering ? 90 + Math.random() * 40 : 60 + Math.random() * 30;
-        const maxLife = hovering ? 60 + Math.random() * 40 : 40 + Math.random() * 35;
-        const maxAlpha = hovering ? 0.45 + Math.random() * 0.25 : 0.3 + Math.random() * 0.2;
+        // Tapered sizing: Start wide at cursor, gradually narrow down as it dissipates
+        const startSize = hovering ? 65 + Math.random() * 25 : 45 + Math.random() * 20;
+        const endSize = hovering ? 14 + Math.random() * 8 : 8 + Math.random() * 6;
+        
+        // Slow-motion lifespan (2.5 to 3.5 seconds)
+        const maxLife = hovering ? 130 + Math.random() * 50 : 95 + Math.random() * 35;
+        const maxAlpha = hovering ? 0.4 + Math.random() * 0.15 : 0.26 + Math.random() * 0.12;
 
-        // Blend slightly with secondary color
-        const useSecondary = Math.random() > 0.6;
+        // Blend colors for soft multi-tone smoke cloud
+        const useSecondary = Math.random() > 0.5;
         const colorRgb = useSecondary ? activePreset.secondaryRGB : activePreset.primaryRGB;
 
         particlesRef.current.push({
@@ -197,13 +200,12 @@ const SmokeCursor: React.FC = () => {
           y: y + jitterY,
           vx,
           vy,
-          size: initialSize,
-          maxSize,
-          growth: (maxSize - initialSize) / maxLife,
+          startSize,
+          endSize,
           life: 0,
           maxLife,
           angle,
-          spin: (Math.random() - 0.5) * 0.03,
+          spin: (Math.random() - 0.5) * 0.008,
           colorRgb,
           alpha: 0,
           maxAlpha,
@@ -211,9 +213,8 @@ const SmokeCursor: React.FC = () => {
         });
       }
 
-      // Limit particle array size for peak performance
-      if (particlesRef.current.length > 200) {
-        particlesRef.current = particlesRef.current.slice(-200);
+      if (particlesRef.current.length > 400) {
+        particlesRef.current = particlesRef.current.slice(-400);
       }
     };
 
@@ -232,32 +233,36 @@ const SmokeCursor: React.FC = () => {
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     window.addEventListener("touchmove", handleTouchMove, { passive: true });
 
-    // Idle ambient particle generator (gently emits subtle smoke when stationary)
+    // Idle slow-mo ambient smoke generator
     let lastIdleTime = Date.now();
     const idleInterval = setInterval(() => {
       const now = Date.now();
       const mouse = mousePosRef.current;
-      if (mouse.x > 0 && now - lastIdleTime > 150 && isEnabled) {
+      if (mouse.x > 0 && now - lastIdleTime > 110 && isEnabled) {
         lastIdleTime = now;
-        particlesRef.current.push({
-          x: mouse.x + (Math.random() - 0.5) * 8,
-          y: mouse.y + (Math.random() - 0.5) * 8,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: -0.5 - Math.random() * 0.5,
-          size: 14,
-          maxSize: 50,
-          growth: 0.6,
-          life: 0,
-          maxLife: 45,
-          angle: Math.random() * Math.PI * 2,
-          spin: (Math.random() - 0.5) * 0.02,
-          colorRgb: activePreset.primaryRGB,
-          alpha: 0,
-          maxAlpha: isHoveringRef.current ? 0.35 : 0.2,
-          isHovering: isHoveringRef.current,
-        });
+        const hovering = isHoveringRef.current;
+        const spawnCount = hovering ? 2 : 1;
+
+        for (let k = 0; k < spawnCount; k++) {
+          particlesRef.current.push({
+            x: mouse.x + (Math.random() - 0.5) * (hovering ? 14 : 8),
+            y: mouse.y + (Math.random() - 0.5) * (hovering ? 14 : 8),
+            vx: (Math.random() - 0.5) * 0.2,
+            vy: -0.15 - Math.random() * 0.15,
+            startSize: hovering ? 55 : 38,
+            endSize: hovering ? 12 : 6,
+            life: 0,
+            maxLife: hovering ? 110 : 80,
+            angle: Math.random() * Math.PI * 2,
+            spin: (Math.random() - 0.5) * 0.005,
+            colorRgb: Math.random() > 0.5 ? activePreset.primaryRGB : activePreset.secondaryRGB,
+            alpha: 0,
+            maxAlpha: hovering ? 0.34 : 0.22,
+            isHovering: hovering,
+          });
+        }
       }
-    }, 180);
+    }, 110);
 
     // Main animation render loop
     const render = () => {
@@ -279,20 +284,22 @@ const SmokeCursor: React.FC = () => {
           continue;
         }
 
-        // Update physics
+        // Update slow-mo physics with air drag
         p.x += p.vx;
         p.y += p.vy;
-        p.vx *= 0.97; // Drag factor
-        p.vy *= 0.97; // Drag factor
-        p.size = Math.min(p.maxSize, p.size + p.growth);
+        p.vx *= 0.985; // Smooth air resistance
+        p.vy *= 0.985;
         p.angle += p.spin;
 
-        // Smooth fade-in & fade-out curve
+        // Smooth tapering width formula: Starts wide near cursor, shrinks gradually down to narrow tail
         const progress = p.life / p.maxLife;
-        if (progress < 0.2) {
-          p.alpha = (progress / 0.2) * p.maxAlpha;
+        const currentSize = Math.max(2, p.startSize - (p.startSize - p.endSize) * Math.pow(progress, 0.7));
+
+        // Smooth slow-mo fade curve (fast initial bloom, gradual fade-out)
+        if (progress < 0.12) {
+          p.alpha = (progress / 0.12) * p.maxAlpha;
         } else {
-          p.alpha = (1 - (progress - 0.2) / 0.8) * p.maxAlpha;
+          p.alpha = (1 - (progress - 0.12) / 0.88) * p.maxAlpha;
         }
 
         // Render smoke particle
@@ -304,14 +311,14 @@ const SmokeCursor: React.FC = () => {
           ctx.globalAlpha = Math.max(0, Math.min(1, p.alpha));
           ctx.drawImage(
             texture,
-            -p.size / 2,
-            -p.size / 2,
-            p.size,
-            p.size
+            -currentSize / 2,
+            -currentSize / 2,
+            currentSize,
+            currentSize
           );
         } else {
           // Fallback radial gradient
-          const rad = ctx.createRadialGradient(0, 0, 0, 0, 0, p.size / 2);
+          const rad = ctx.createRadialGradient(0, 0, 0, 0, 0, currentSize / 2);
           const [r, g, b] = p.colorRgb;
           rad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${p.alpha})`);
           rad.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, ${p.alpha * 0.4})`);
@@ -319,7 +326,7 @@ const SmokeCursor: React.FC = () => {
 
           ctx.fillStyle = rad;
           ctx.beginPath();
-          ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
+          ctx.arc(0, 0, currentSize / 2, 0, Math.PI * 2);
           ctx.fill();
         }
 
@@ -432,16 +439,16 @@ const SmokeCursor: React.FC = () => {
               {/* Density Multiplier Slider */}
               <div className="border-t border-gray-800 pt-2.5">
                 <div className="flex justify-between text-[11px] text-gray-400 mb-1">
-                  <span>Smoke Intensity</span>
+                  <span>Smoke Density</span>
                   <span className="font-semibold text-emerald-400">
-                    {densityMultiplier === 0.5 ? "Light" : densityMultiplier === 1 ? "Normal" : "Dense"}
+                    {densityMultiplier === 0.7 ? "Light" : densityMultiplier === 1.2 ? "Medium" : "Thick"}
                   </span>
                 </div>
                 <div className="flex gap-1">
                   {[
-                    { label: "Low", val: 0.5 },
-                    { label: "Med", val: 1 },
-                    { label: "High", val: 1.5 },
+                    { label: "Light", val: 0.7 },
+                    { label: "Medium", val: 1.2 },
+                    { label: "Thick", val: 1.8 },
                   ].map((level) => (
                     <button
                       key={level.label}
