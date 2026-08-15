@@ -53,7 +53,7 @@ const Education = () => {
             title="Full-Stack Software Engineering"
             subTitle="CMIT (Government-Certified)"
             result="Completed"
-            des="Government-certified training gaining hands-on industry experience in modern web development technologies."
+            des="Government-certified training gaining hands-on industry experience in modern web development technologies at VirtueNetz."
           />
         </div>
       </div>
