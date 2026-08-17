@@ -18,7 +18,7 @@ const Education = () => {
           <ResumeCard
             title="B.Sc. Software Engineering"
             subTitle="KFUEIT, Rahim Yar Khan (2020 - 2024)"
-            result="CGPA 3.5/4.0 (Grade A)"
+            result="CGPA 3.51/4.0 (Grade A)"
             des="Completed a robust Software Engineering degree with focus on SDLC, OOP, Algorithms, and Data Structures."
           />
           <ResumeCard
