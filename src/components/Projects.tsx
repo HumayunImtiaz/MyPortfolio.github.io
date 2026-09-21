@@ -20,7 +20,7 @@ const Projects = () => {
       <FadeIn>
         <div className="flex justify-center items-center text-center">
           <Title
-            title="VISIT MY PORTFOLIO AND KEEP YOUR FEEDBACK"
+            title="VISIT MY PORTFOLIO AND KEEP YOUR FEEDBACK "
             des="My Projects"
           />
         </div>
@@ -32,7 +32,7 @@ const Projects = () => {
           />
           <ProjectsCard
             title="AI Resume & GitHub Analyzer"
-            des="Intelligent analysis tool using Google Gemini API for automated resume parsing and GitHub profile evaluation with real-time AI-generated feedback."
+            des="Its's Intelligent analysis tool using Google Gemini API for automated resume parsing and GitHub profile evaluation with real-time AI-generated feedback."
             src={projectTwo}
           />
           <ProjectsCard
