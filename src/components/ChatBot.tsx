@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { FaRobot, FaTimes, FaPaperPlane } from "react-icons/fa";
 
 // Interface for chat message
@@ -23,10 +22,6 @@ const ChatBot = () => {
   const [usageCount, setUsageCount] = useState(0);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  // Initialize Gemini AI
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
-  const genAI = new GoogleGenerativeAI(apiKey);
 
   // Load limits on mount
   useEffect(() => {
@@ -83,69 +78,25 @@ const ChatBot = () => {
     setIsLoading(true);
 
     try {
-      // Check if API key is available
-      if (!apiKey) {
-        console.error("Gemini API key is missing. VITE_GEMINI_API_KEY is not set.");
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: "model",
-            text: "The AI assistant is currently being configured. Please contact Humayun directly through the contact form or email at Humayunimtiaz81@gmail.com!",
-          },
-        ]);
-        setIsLoading(false);
-        return;
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: userText }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Server API Error: ${response.statusText}`);
       }
 
-      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-
-      // System Prompt for Humayun's Assistant
-      const SYSTEM_PROMPT = `You are a helpful, professional, and friendly AI assistant representing Humayun Imtiaz.
-Your job is to answer questions about Humayun's skills, experience, and education.
-
-CRITICAL INSTRUCTION: If a user asks about a skill, project, or industry (like "FBR website", "Machine Learning", etc.) that is NOT explicitly listed in the context below, you must NOT say he doesn't have experience. Instead, you MUST state that Humayun also works as a **Solution Engineer**—a specialized problem solver who can research, architect, and deliver a tailored solution for any complex technical requirement.
-
-Keep your responses concise (1-3 sentences max) and conversational.
-
-HUMAYUN IMTIAZ'S PROFILE:
-- Role: Full-Stack Software Engineer & **Solution Engineer**
-- Specialization: MERN/PERN Stack, AI Integration, Custom Problem Solving
-- Location: Pakistan
-- Contact: Humayunimtiaz81@gmail.com, +92 305 4353847
-- Education: B.Sc. Software Engineering from KFUEIT, Rahim Yar Khan (CGPA: 3.51)
-- Certification: Google AI Essentials (Coursera, Apr 2026)
-
-SKILLS:
-- Frontend: HTML5, CSS3, Tailwind CSS, JavaScript (ES6+), TypeScript, React.js, Next.js, Redux Toolkit
-- Backend: Node.js, Express.js, REST APIs, Socket.io, Webhooks, MVC Architecture
-- Databases: MongoDB, PostgreSQL, Prisma ORM, Knex, Supabase, Neon
-- AI Integration: Google Gemini API, LLM Application Development, Prompt Engineering
-- Tools: Docker, Git, GitHub, Vercel, VS Code, Render, Railway, Hugging Face
-- Note: Background in video editing and IT content management up to 2023.
-
-EXPERIENCE:
-- Software Engineer (Full-Stack) at Virtue Netz (Jan 2025 - Present): Built LuxaCart, Pettigo, real-time chat via Socket.io. Integrated Gemini API for Resume/GitHub Analyzer.
-- Full-Stack SWE Internship at CMIT (Government-Certified)
-- Teaching Assistant (C++ & Web Dev) at KFUEIT (Sep 2022 - Jun 2024): Guided 50+ students.
-
-PROJECTS:
-- E-Commerce Marketplace: Next.js, Node.js, Socket.io, Neon PostgreSQL, Prisma.
-- AI-Powered Resume & GitHub Analyzer: Uses Gemini API & Next.js.
-- Real-Time Chat App: Next.js, Socket.io, PostgreSQL (Supabase), Knex.
-- Other Frontends: Outfit Cart, MovieLand, Restaurant Dining Experience and many mores.`;
-
-      // Providing context to the model to act as Humayun's assistant
-      const promptContext = `${SYSTEM_PROMPT}\n\nThe user asks: ${userText}`;
-
-      const result = await model.generateContent(promptContext);
-      const responseText = result.response.text();
+      const data = await response.json();
+      const responseText = data.answer || "I'm sorry, I didn't receive a response from the server.";
 
       setMessages((prev) => [...prev, { role: "model", text: responseText }]);
       incrementUsage();
     } catch (error: any) {
-      console.error("Gemini API Error:", error?.message || error);
-      console.error("API Key present:", !!apiKey);
-      console.error("Full error:", JSON.stringify(error, null, 2));
+      console.error("Chat API Error:", error?.message || error);
       setMessages((prev) => [
         ...prev,
         {

@@ -10,15 +10,19 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "ingest": "tsx scripts/ingest.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
+    "@google/genai": "^2.24.0",
     "@google/generative-ai": "^0.24.1",
+    "@pinecone-database/pinecone": "^9.0.0",
     "framer-motion": "^10.16.1",
     "gh": "^1.11.14",
     "gh-pages": "^6.3.0",
     "pages": "^0.0.16",
+    "pdf-parse": "^2.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
@@ -28,6 +32,7 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
+    "@types/node": "^26.6.2",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@types/react-scroll": "^1.8.7",
@@ -36,11 +41,13 @@
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
     "autoprefixer": "^10.4.15",
+    "dotenv": "^18.0.3",
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "postcss": "^8.4.28",
     "tailwindcss": "^3.3.3",
+    "tsx": "^4.23.15",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
   }
