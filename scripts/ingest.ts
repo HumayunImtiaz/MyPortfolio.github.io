@@ -104,7 +104,7 @@ async function main() {
     // Upsert in batches of 100
     for (let i = 0; i < vectors.length; i += 100) {
       const batch = vectors.slice(i, i + 100);
-      await index.upsert(batch);
+      await index.upsert({ records: batch });
     }
     
     console.log(`Successfully ingested and uploaded ${vectors.length} chunks!`);

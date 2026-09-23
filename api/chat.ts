@@ -1,17 +1,12 @@
 import { Pinecone } from "@pinecone-database/pinecone";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY || "";
 const PINECONE_API_KEY = process.env.PINECONE_API_KEY || "";
 const PINECONE_INDEX_NAME = process.env.PINECONE_INDEX_NAME || "";
 
-const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-// Use exactly what the user specified for embeddings
-const embeddingModel = genAI.getGenerativeModel({ model: "gemini-embedding-2" });
-// Using gemini-2.5-flash as the main LLM (was used originally in ChatBot.tsx)
-const chatModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-
-const pc = new Pinecone({ apiKey: PINECONE_API_KEY });
+const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY as string });
+const pc = new Pinecone({ apiKey: PINECONE_API_KEY as string });
 
 export default async function handler(req: any, res: any) {
   if (req.method !== "POST") {
@@ -29,8 +24,15 @@ export default async function handler(req: any, res: any) {
     }
 
     // 1. Generate embedding for user question
-    const embedResult = await embeddingModel.embedContent(message);
-    const queryEmbedding = embedResult.embedding.values;
+    const embedResult = await ai.models.embedContent({
+      model: "gemini-embedding-2",
+      contents: message,
+    });
+    const queryEmbedding = embedResult.embeddings?.[0]?.values ?? [];
+
+    if (!queryEmbedding.length) {
+      return res.status(500).json({ error: "Failed to generate embeddings." });
+    }
 
     // 2. Query Pinecone for relevant chunks
     const index = pc.Index(PINECONE_INDEX_NAME);
@@ -63,11 +65,15 @@ ${contexts}
 `;
 
     // 5. Send to Gemini
-    const result = await chatModel.generateContent([
-      { text: SYSTEM_PROMPT },
-      { text: `User request: ${message}` }
-    ]);
-    const responseText = result.response.text();
+    const result = await ai.models.generateContent({
+      model: "gemini-3.6-flash",
+      contents: message,
+      config: {
+        systemInstruction: SYSTEM_PROMPT,
+      }
+    });
+
+    const responseText = result.text;
 
     return res.status(200).json({ answer: responseText });
 
