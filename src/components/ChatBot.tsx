@@ -65,7 +65,7 @@ const ChatBot = () => {
         { role: "user", text: inputMessage },
         {
           role: "model",
-          text: "My daily free usage limit is reached . Please reach out to Humayun directly via the contact form or email!",
+          text: "Sorry My daily free usage limit is reached . Please reach out to Humayun directly via the contact form or email!",
         },
       ]);
       setInputMessage("");
@@ -160,8 +160,8 @@ const ChatBot = () => {
               >
                 <div
                   className={`max-w-[80%] rounded-xl px-4 py-3 text-sm leading-relaxed ${msg.role === "user"
-                      ? "bg-designColor text-black font-medium rounded-br-none"
-                      : "bg-gray-800 text-gray-200 rounded-bl-none border border-gray-700"
+                    ? "bg-designColor text-black font-medium rounded-br-none"
+                    : "bg-gray-800 text-gray-200 rounded-bl-none border border-gray-700"
                     }`}
                 >
                   {msg.text}
