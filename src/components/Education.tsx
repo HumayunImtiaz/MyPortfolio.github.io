@@ -48,6 +48,10 @@ const Education = () => {
             subTitle="Coursera - (Apr 2026)"
             result="Certified"
             des="Earned Google AI Essentials certification to apply foundational AI concepts and LLMs effectively in development pipelines."
+            link={{
+              label: "View Coursera Certificate",
+              href: "https://www.coursera.org/account/accomplishments/specialization/S47E2YE168NL",
+            }}
           />
           <ResumeCard
             title="Full-Stack Software Engineering"

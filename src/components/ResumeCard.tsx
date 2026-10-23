@@ -1,4 +1,14 @@
-const ResumeCard = ({ title, subTitle, result, des }: any) => {
+import { FaExternalLinkAlt } from "react-icons/fa";
+
+interface Props {
+  title: string;
+  subTitle?: string;
+  result: string;
+  des: string;
+  link?: { label: string; href: string };
+}
+
+const ResumeCard = ({ title, subTitle, result, des, link }: Props) => {
   return (
     <div className="w-full h-1/3 group flex">
       <div className="w-10 h-[6px] bgOpacity mt-16 relative">
@@ -25,6 +35,17 @@ const ResumeCard = ({ title, subTitle, result, des }: any) => {
         <p className="text-sm md:text-base font-medium text-gray-400 group-hover:text-gray-300 duration-300">
           {des}
         </p>
+        {link && (
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-fit items-center gap-2 rounded-md border border-designColor/30 bg-designColor/5 px-4 py-2 text-sm font-medium text-designColor transition-colors hover:border-designColor hover:bg-designColor/10"
+          >
+            {link.label}
+            <FaExternalLinkAlt className="text-xs" aria-hidden="true" />
+          </a>
+        )}
       </div>
     </div>
   );
