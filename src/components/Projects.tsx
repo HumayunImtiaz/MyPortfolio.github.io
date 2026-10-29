@@ -9,6 +9,7 @@ import kitchenKonnect from '../assets/images/projects/kitchenKonnect.png';
 import projectTwoo from '../assets/images/projects/projectTwoo.png';
 import projectTwo from '../assets/images/projects/projectTwo.png';
 import projectThree from '../assets/images/projects/projectThree.png';
+import neonCinema from '../assets/images/projects/neonCinema.png';
 
 
 import { FadeIn } from "./FadeIn";
@@ -27,6 +28,17 @@ const Projects = () => {
           />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-14">
+          <ProjectsCard
+            title="Neon Cinema"
+            des="Cinematic AI creative studio inspired by Higgsfield AI, built with Next.js, TypeScript, Tailwind CSS, and Supabase. Features responsive UI, media galleries, AI generation interfaces, authentication, animations, and Vercel deployment."
+            src={neonCinema}
+            links={[
+              {
+                label: "Live Demo",
+                href: "https://8x-z9k5.vercel.app/",
+              },
+            ]}
+          />
           <ProjectsCard
             title="Quick Switch 24/7"
             des="Full-stack logistics platform with account-scoped authentication and RBAC. Built with Next.js, NestJS, PostgreSQL, Knex.js, and Docker, with scalable modules for products, carrier inventory, pricing, and wallet transactions. Bulk CSV uploads are validated and staged before reaching live tables."
