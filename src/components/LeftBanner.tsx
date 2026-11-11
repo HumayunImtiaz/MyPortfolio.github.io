@@ -1,5 +1,5 @@
 import { useTypewriter, Cursor } from "react-simple-typewriter";
-import { FaFacebookF, FaLinkedinIn, FaReact, FaWhatsapp, FaNodeJs } from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaReact, FaWhatsapp, FaNodeJs, FaYoutube } from "react-icons/fa";
 import { SiTypescript, SiPostgresql } from "react-icons/si";
 import { FadeIn } from "./FadeIn";
 
@@ -28,6 +28,18 @@ const LeftBanner = () => {
         Full-Stack Software Engineer with 2+ years of professional experience building scalable, user-facing web applications using MERN and PERN stacks. Proficient in Next.js, TypeScript, PostgreSQL, Prisma, Docker, Socket.io, and AI API integration (Google Gemini). B.Sc. Software Engineering graduate with 3.51 GPA (Grade A).
 
         </p>
+        <a
+          href="https://youtu.be/3fTupDDxhqM"
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex w-fit items-center gap-3 rounded-full border border-designColor/60 bg-designColor/10 px-5 py-3 text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-designColor hover:bg-designColor hover:text-bodyColor"
+          aria-label="Watch my introduction video on YouTube"
+        >
+          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-designColor text-bodyColor">
+            <FaYoutube />
+          </span>
+          Watch my intro video
+        </a>
       </div>
       <div className="flex flex-col xl:flex-row gap-6 lgl:gap-0 justify-between">
         <div>
