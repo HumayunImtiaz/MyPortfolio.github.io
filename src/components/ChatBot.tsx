@@ -95,8 +95,11 @@ const ChatBot = () => {
 
       setMessages((prev) => [...prev, { role: "model", text: responseText }]);
       incrementUsage();
-    } catch (error: any) {
-      console.error("Chat API Error:", error?.message || error);
+    } catch (error: unknown) {
+      console.error(
+        "Chat API Error:",
+        error instanceof Error ? error.message : error
+      );
       setMessages((prev) => [
         ...prev,
         {

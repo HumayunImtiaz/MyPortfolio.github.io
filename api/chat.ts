@@ -8,16 +8,27 @@ const PINECONE_INDEX_NAME = process.env.PINECONE_INDEX_NAME || "";
 const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY as string });
 const pc = new Pinecone({ apiKey: PINECONE_API_KEY as string });
 
-export default async function handler(req: any, res: any) {
+interface ChatRequest {
+  method: string;
+  body?: { message?: unknown };
+}
+
+interface ChatResponse {
+  status: (code: number) => ChatResponse;
+  json: (data: unknown) => void;
+}
+
+export default async function handler(req: ChatRequest, res: ChatResponse) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
-    const { message } = req.body;
-    if (!message) {
+    const message = req.body?.message;
+    if (typeof message !== "string" || !message.trim()) {
       return res.status(400).json({ error: "Message is required." });
     }
+    const userMessage = message.trim();
 
     if (!GEMINI_API_KEY || !PINECONE_API_KEY || !PINECONE_INDEX_NAME) {
       return res.status(500).json({ error: "Server configuration error: missing API keys." });
@@ -26,7 +37,7 @@ export default async function handler(req: any, res: any) {
     // 1. Generate embedding for user question
     const embedResult = await ai.models.embedContent({
       model: "gemini-embedding-2",
-      contents: message,
+      contents: userMessage,
     });
     const queryEmbedding = embedResult.embeddings?.[0]?.values ?? [];
 
@@ -65,20 +76,44 @@ ${contexts}
 `;
 
     // 5. Send to Gemini
-    const result = await ai.models.generateContent({
-      model: "gemini-3.6-flash",
-      contents: message,
+    const generationConfig = {
+      contents: userMessage,
       config: {
         systemInstruction: SYSTEM_PROMPT,
+      },
+    };
+
+    let result: Awaited<ReturnType<typeof ai.models.generateContent>>;
+    try {
+      result = await ai.models.generateContent({
+        model: "gemini-3.6-flash",
+        ...generationConfig,
+      });
+    } catch (error) {
+      const status =
+        typeof error === "object" && error !== null && "status" in error
+          ? error.status
+          : undefined;
+
+      if (status !== 503) {
+        throw error;
       }
-    });
+
+      console.warn("Gemini 3.6 Flash is unavailable; retrying with Gemini 3.5 Flash-Lite.");
+      result = await ai.models.generateContent({
+        model: "gemini-3.5-flash-lite",
+        ...generationConfig,
+      });
+    }
 
     const responseText = result.text;
 
     return res.status(200).json({ answer: responseText });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("API Chat Error:", error);
-    return res.status(500).json({ error: error.message || "Internal Server Error" });
+    const message =
+      error instanceof Error ? error.message : "Internal Server Error";
+    return res.status(500).json({ error: message });
   }
 }
